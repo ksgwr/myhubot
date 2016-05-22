@@ -9,6 +9,7 @@
 #  hubot put - put dictionary key -> value
 #  hubot delete - delete dictionary by key
 #  hubot value - search dictionary by value
+#  hubot redisEnable - get redis status
 #
 # Notes:
 #  すべての呼びかけに応答する
@@ -19,6 +20,7 @@
 Dic = require('../lib/dic')
 dic = new Dic()
 dic.load('public/dic/dic.tsv');
+dic.setRedisClient(process.env.REDISCLOUD_URL)
 
 module.exports = (robot) ->
     HUBOT_DIC_DEVELOP = process.env.HUBOT_DIC_DEVELOP or true
@@ -40,6 +42,9 @@ module.exports = (robot) ->
         robot.respond /value (.+)/i, (msg) ->
             keys = dic.searchKeys msg.match[1]
             msg.send "#{msg.match[1]} in #{keys.join(',')}"
+
+        robot.respond /enableRedis/i, (msg) ->
+            msg.send "redis is #{dic.enableRedis}"
 
         robot.router.get '/entries', (req, res) ->
             res.type 'json'
