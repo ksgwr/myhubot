@@ -41,6 +41,10 @@ module.exports = (robot) ->
             keys = dic.searchKeys msg.match[1]
             msg.send "#{msg.match[1]} in #{keys.join(',')}"
 
+        robot.router.get '/entries', (req, res) ->
+            res.type 'json'
+            res.send dic.totsv()
+
     robot.respond /.*/, (msg) ->
         pos = if robot.name == '' then 0 else 1
         cmd = msg.match[0].split(' ')[pos]
