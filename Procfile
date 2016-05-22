@@ -1,1 +1,1 @@
-web: bin/hubot -a line -n ksgwr
+web: bin/hubot -a line -n ""
