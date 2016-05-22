@@ -19,8 +19,8 @@
 
 Dic = require('../lib/dic')
 dic = new Dic()
-dic.load('public/dic/dic.tsv');
 dic.setRedisClient(process.env.REDISCLOUD_URL)
+dic.load('public/dic/dic.tsv');
 
 module.exports = (robot) ->
     HUBOT_DIC_DEVELOP = process.env.HUBOT_DIC_DEVELOP or true
